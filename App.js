@@ -1,7 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,TextInput, TouchableOpacity, Alert, Image } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, Text, View,TextInput, TouchableOpacity, Alert, Image,FlatList } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
 
 export default function App() {
+
+  const [products, setProducts] = useState([
+    {  name: 'Tasty Donut', image: require('./assets/images/donut_red 1.png'),price:'$10.00',info:'spicy tasty donut fmaily', key: '1' },
+    {  name: 'Tasty Donut', image: require('./assets/images/donut_yellow 1.png'),price:'$10.00',info:'spicy tasty donut fmaily', key: '2' },
+    {  name: 'Tasty Donut', image: require('./assets/images/donut_red 1.png'),price:'$10.00',info:'spicy tasty donut fmaily', key: '3' },
+    {  name: 'Tasty Donut', image: require('./assets/images/donut_yellow 1.png'),price:'$10.00',info:'spicy tasty donut fmaily', key: '4' },
+    {  name: 'Tasty Donut', image: require('./assets/images/donut_red 1.png'),price:'$10.00',info:'spicy tasty donut fmaily', key: '5' },
+    {  name: 'Tasty Donut', image: require('./assets/images/donut_yellow 1.png'),price:'$10.00',info:'spicy tasty donut fmaily', key: '6' },
+    {  name: 'Tasty Donut', image: require('./assets/images/donut_red 1.png'),price:'$10.00',info:'spicy tasty donut fmaily', key: '7' },
+    {  name: 'Tasty Donut', image: require('./assets/images/donut_yellow 1.png'),price:'$10.00',info:'spicy tasty donut fmaily', key: '8' },
+    {  name: 'Tasty Donut', image: require('./assets/images/donut_red 1.png'),price:'$10.00',info:'spicy tasty donut fmaily', key: '9' },
+    {  name: 'Tasty Donut', image: require('./assets/images/donut_yellow 1.png'),price:'$10.00',info:'spicy tasty donut fmaily', key: '10' },  
+  ]);
+  
   return (
     <View style={styles.container}>
       <Text style = {{fontSize:16,fontFamily:'Roboto'}}>Wellcome, Bryan!</Text>
@@ -15,19 +34,23 @@ export default function App() {
         </View>
 
         <View style={styles.listProd}>
-
+          <FlatList
+          data={products}
+          renderItem={({ item }) => (
           <View style={styles.Prod}>
-          <Image source={require('./assets/images/donut_yellow 1.png')} style={{height:100,width:100,borderRadius:10}}/>
           
-          <View style={{justifyContent: 'space-around', marginLeft:20}}>
-            <Text style={{fontSize:20,fontFamily:'Roboto',fontWeight:'bold'}}>Tasty Donut</Text>
-            <Text style={{fontSize:14,fontFamily:'Roboto',fontWeight:'bold',color:'gray'}}>spicy tasty donut fmaily</Text>
-            <Text style={{fontSize:20,fontFamily:'Roboto',fontWeight:'bold'}}>$10.00</Text>
-          </View>
+              <View style={{flexDirection:'row'}}>
+                <Image source={item.image} style={{width:100,height:100,borderRadius:10}} />
+                <View style={{justifyContent: 'space-around', marginLeft:20}}>
+                  <Text style={{fontSize:20,fontFamily:'Roboto',fontWeight:'bold'}}>{item.name}</Text>
+                  <Text style={{fontSize:14,fontFamily:'Roboto',fontWeight:'bold',color:'gray'}}>spicy tasty donut fmaily</Text>
+                  <Text style={{fontSize:20,fontFamily:'Roboto',fontWeight:'bold'}}>$10.00</Text>
+                </View>
+                <TouchableOpacity style={{height:25,width:50, borderWidth:1,borderColor:"black",alignItems:'center',marginTop:80}}><Text>View</Text></TouchableOpacity>
+              </View> 
 
-          <TouchableOpacity style={{height:25,width:50, borderWidth:1,borderColor:"black",alignItems:'center',marginTop:80}}><Text>View</Text></TouchableOpacity>
           </View>
-
+          )}/>
         </View>
       <StatusBar style="auto" />
     </View>
@@ -51,15 +74,28 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
   },
   listProd:{
+    flex:1,
     marginTop: 20,
 
   },
   Prod:{
     width:337,
     height:115,
+    marginTop:10,
     padding:8,
     backgroundColor:'#F4DDDD',
     borderRadius:10,
     flexDirection:'row',
   }
 });
+
+
+{/* <Image source={require('./assets/images/donut_yellow 1.png')} style={{height:100,width:100,borderRadius:10}}/>
+          
+          <View style={{justifyContent: 'space-around', marginLeft:20}}>
+            <Text style={{fontSize:20,fontFamily:'Roboto',fontWeight:'bold'}}>Tasty Donut</Text>
+            <Text style={{fontSize:14,fontFamily:'Roboto',fontWeight:'bold',color:'gray'}}>spicy tasty donut fmaily</Text>
+            <Text style={{fontSize:20,fontFamily:'Roboto',fontWeight:'bold'}}>$10.00</Text>
+          </View>
+
+          <TouchableOpacity style={{height:25,width:50, borderWidth:1,borderColor:"black",alignItems:'center',marginTop:80}}><Text>View</Text></TouchableOpacity> */}
